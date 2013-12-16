@@ -4,23 +4,23 @@ import san.coll.fn.NoArg;
 import san.coll.fn.Delay;
 import san.coll.fn.Unary;
 
-public class LazySeq implements ISeq {
+public class LazySeq<T> implements ISeq {
 
   public static ISeq create(Object first, NoArg producer) {
     return new LazySeq(first, Delay.create(producer));
   }
 
-  private final Object first;
+  private final T first;
 
   private final Delay promise;
 
-  private LazySeq(Object first, Delay promise) {
+  private LazySeq(T first, Delay promise) {
     this.first = first;
     this.promise = promise;
   }
 
   @Override
-  public Object first() {
+  public T first() {
     return this.first;
   }
 
